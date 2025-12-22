@@ -2,32 +2,21 @@
 import heapq
 
 def dijkstra(graph, start):
-    # graph: adjacency list {node: [(neighbor, weight), ...]}
-    # start: starting node
-    
-    # Step 1: Initialize distances
     distances = {node: float('inf') for node in graph}
     distances[start] = 0
-    
-    # Step 2: Priority queue (min-heap)
-    pq = [(0, start)]  # (distance, node)
-    
+    pq = [(0, start)]
+
     while pq:
-        current_dist, current_node = heapq.heappop(pq)
-        
-        # Skip if we already found a shorter path
-        if current_dist > distances[current_node]:
+        dist, node = heapq.heappop(pq)
+        if dist > distances[node]:
             continue
-        
-        # Step 3: Explore neighbors
-        for neighbor, weight in graph[current_node]:
-            distance = current_dist + weight
-            
-            # If shorter path found → update
-            if distance < distances[neighbor]:
-                distances[neighbor] = distance
-                heapq.heappush(pq, (distance, neighbor))
-    
+
+        for neighbor, weight in graph[node]:
+            new_dist = dist + weight
+            if new_dist < distances[neighbor]:
+                distances[neighbor] = new_dist
+                heapq.heappush(pq, (new_dist, neighbor))
+
     return distances
 
 
@@ -38,5 +27,5 @@ if __name__ == "__main__":
         'C': [('D', 1)],
         'D': []
     }
-    
-    print("Shortest paths from A:", dijkstra(graph, 'A'))
+    print(dijkstra(graph, 'A'))
+
