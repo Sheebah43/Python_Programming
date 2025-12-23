@@ -1,7 +1,9 @@
 # Median of 2 sorted arrays 
 def median(array1, array2):
-    merged = sorted(array1 + array2)
-    n=len(merged)
+    # merged = sorted(array1 + array2) ya toh yeh
+    merged = (array1 + array2)
+    merged.sort()
+    n=len(merged) #ya toh yeh
 
     if n%2==1:
         return merged [n//2]
