@@ -1,4 +1,3 @@
-# shortest path
 import heapq
 
 def dijkstra(graph, start):
@@ -7,18 +6,17 @@ def dijkstra(graph, start):
     pq = [(0, start)]
 
     while pq:
-        dist, node = heapq.heappop(pq)
-        if dist > distances[node]:
+        cur_dist, cur_node = heapq.heappop(pq)
+        if cur_dist > distances[cur_node]:
             continue
 
-        for neighbor, weight in graph[node]:
-            new_dist = dist + weight
+        for neighbor, weight in graph[cur_node]:
+            new_dist = cur_dist + weight
             if new_dist < distances[neighbor]:
                 distances[neighbor] = new_dist
                 heapq.heappush(pq, (new_dist, neighbor))
 
     return distances
-
 
 if __name__ == "__main__":
     graph = {
@@ -28,4 +26,3 @@ if __name__ == "__main__":
         'D': []
     }
     print(dijkstra(graph, 'A'))
-
